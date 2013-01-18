@@ -19,6 +19,19 @@ but cartego does offer some distinct differences:
   * users only need a binary to run stand-alone
 * cartego is a library (easy to embed) and a protocol built on HTTP
 
+The bundled `cartego` command can act as either a server or a cli downloader.
+To compile (if it's in your GOPATH):
+
+    go install cartego/cartego
+
+Help information can by found by:
+
+    cartego -help
+
+For example, to download all tiles within 1 km of the White House:
+
+    cartego 38.8977 -77.0366 1
+
 License
 =======
 
