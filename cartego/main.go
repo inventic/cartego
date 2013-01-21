@@ -320,7 +320,7 @@ func download(lat, lon, rad float64, minZoom, maxZoom int) {
     os.Exit(1)
   }
 
-  tiles := getTileCoords(lat, lon, rad * 1000, minZoom, maxZoom)
+  tiles := cartego.GetTileCoords(lat, lon, rad * 1000, minZoom, maxZoom)
   err := loadCacheFlat()
   if err != nil {
     fmt.Fprintf(os.Stderr, "Error reading cached tiles, assuming none:", err)

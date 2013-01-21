@@ -1,7 +1,6 @@
-package main
+package cartego
 
 import (
-  "cartego"
   "math"
 )
 
@@ -34,7 +33,7 @@ func lonToXPixels(lon float64, zoom int) int {
   return int(math.Floor(pixX))
 }
 
-func getMercatorFromGPS(p Point, zoom int) cartego.Tile {
+func getMercatorFromGPS(p Point, zoom int) Tile {
   pixX := lonToXPixels(toRad(p.Lon), zoom)
   pixY := latToYPixels(toRad(p.Lat), zoom)
   maxTile := int(math.Pow(2, float64(zoom)))
@@ -52,7 +51,7 @@ func getMercatorFromGPS(p Point, zoom int) cartego.Tile {
     tileX -= maxTile
   }
 
-  return cartego.Tile{X: tileX, Y: tileY, Zoom: zoom}
+  return Tile{X: tileX, Y: tileY, Zoom: zoom}
 }
 
 func translate(lat, lon, d, bearing float64) Point {
@@ -65,7 +64,7 @@ func translate(lat, lon, d, bearing float64) Point {
   return Point{toDeg(lat2), toDeg(lon2)}
 }
 
-func getTileCoords(lat, lon, radius float64, minZoom, maxZoom int) (ret []cartego.Tile) {
+func GetTileCoords(lat, lon, radius float64, minZoom, maxZoom int) (ret []Tile) {
   north := translate(lat, lon, radius, 0)
   south := translate(lat, lon, radius, 180)
   west := translate(lat, lon, radius, 270)
@@ -79,7 +78,7 @@ func getTileCoords(lat, lon, radius float64, minZoom, maxZoom int) (ret []carteg
 
     for i := x0.X; i <= x1.X; i++ {
       for j := y0.Y; j <= y1.Y; j++ {
-        ret = append(ret, cartego.Tile{X: i, Y: j, Zoom: zoom})
+        ret = append(ret, Tile{X: i, Y: j, Zoom: zoom})
       }
     }
   }
