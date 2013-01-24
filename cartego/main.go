@@ -362,10 +362,9 @@ func download(lat, lon, rad float64, minZoom, maxZoom int) {
     go save(fpath, image, done)
   }
 
-  close(done)
-
   // wait until all tiles have been saved
-  for _ = range done {
+  for i := 0; i < len(tiles); i++ {
+    <-done
   }
 
   fmt.Println("Done!")
